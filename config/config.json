@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "seculity_tutorial_development",
+    "host": "localhost",
+    "dialect": "mysql",
+    "operatorsAliases": "0"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "seculity_tutorial_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": "0"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "seculity_tutorial_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": "0"
+  }
+}

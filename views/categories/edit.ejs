@@ -1,0 +1,8 @@
+<%- include('../partials/header') %>
+    <h1>カテゴリー編集</h1>
+    <form action="/categories/<%= category.id %>" method="post">
+        <input type="hidden" name="_method" value="put">
+        <input type="text" name="categoryName" value="<%= category.name %>">
+        <input type="submit" value="更新">
+    </form>
+<%- include('../partials/footer') %>

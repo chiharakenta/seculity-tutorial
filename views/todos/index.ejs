@@ -1,0 +1,39 @@
+<%- include('../partials/header') %>
+  <div class="todo-form">
+    <h2>Todo登録</h2>
+    <form action="/todos" method="post">
+      <input type="text" name="todoContent">
+      <select name="categoryId">
+        <% categories.map(function(category) { %>
+          <option value="<%= category.id %>"><%= category.name %></option>
+        <% }); %>
+      </select>
+      <input type="submit" value="作成">
+    </form>
+  </div>
+
+  <div class="category-link">
+    <a href="/categories">カテゴリー管理</a>
+  </div>
+
+  <div class="todo">
+    <h2 class="todo-title">Todo一覧</h2>
+      <% categories.map(function(category) { %>
+        <h3 class="todo-category"><%= category.name %></h3>
+        <ul class="todo-list">
+          <% category.todos.map(function(todo) { %>
+            <li class="todo-item">
+              <p><%= todo.content %></p>
+              <a class="todo-item__button" href="/todos/<%= todo.id %>/edit">
+                <button class="button button--edit">編集</button>
+              </a>
+              <form class="todo-item__button" action="/todos/<%= todo.id %>" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input class="button button--delete" type="submit" value="削除">
+              </form>
+            </li>
+          <% }); %>
+        </ul>
+      <% }); %>
+  </div>
+<%- include('../partials/footer') %>

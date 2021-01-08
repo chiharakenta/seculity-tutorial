@@ -1,0 +1,8 @@
+<%- include('../partials/header') %>
+    <h1>編集</h1>
+    <form action="/todos/<%= todo.id %>" method="post">
+        <input type="hidden" name="_method" value="put">
+        <input type="text" name="todoContent" value="<%= todo.content %>">
+        <input type="submit" value="更新">
+    </form>
+<%- include('../partials/footer') %>
