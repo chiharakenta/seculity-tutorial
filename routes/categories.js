@@ -10,17 +10,25 @@ router.get('/', function(req, res) {
     }]
   };
   db.category.findAll(options).then(function(results) {
-    res.render('categories/index.ejs', { categories: results });
+    res.render('categories/index.ejs', { categories: results, errors: false });
   });
+});
+
+router.get('/new', function(req, res) {
+  res.render('categories/new.ejs', { errors: false });
 });
 
 router.post('/', function(req, res) {
   const params = {
     name: req.body.categoryName
   };
-  db.category.create(params).then(function(results) {
-    res.redirect('/categories');
-  });
+  db.category.create(params)
+    .then(function(results) {
+      res.redirect('/categories');
+    })
+    .catch(function(errors) {
+      res.render('categories/new.ejs', { errors: errors.errors });
+    });
 });
 
 router.get('/:id/edit', function(req, res) {

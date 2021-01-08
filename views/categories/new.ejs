@@ -1,0 +1,8 @@
+<%- include('../partials/header') %>
+    <h1>カテゴリー作成</h1>
+    <form action="/categories" method="post">
+        <input type="text" name="categoryName">
+        <input type="submit" value="作成">
+    </form>
+    <a href="/categories">カテゴリー一覧に戻る</a>
+<%- include('../partials/footer') %>

@@ -12,3 +12,12 @@
     <div class="header">
         <h1 class="header-title">Todoリスト</h1>
     </div>
+    <% if (errors) { %>
+        <div class="error-window">
+            <ul>
+                <% errors.map(function(error) { %>
+                    <li><%= error.message %></li>
+                <% }) %>
+            </ul>
+        </div>
+    <% } %>
