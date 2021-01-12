@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
     }]
   };
   db.category.findAll(options).then(function(results) {
-    res.render('todos/index.ejs', { categories: results });
+    res.render('todos/index.ejs', { categories: results, errors: false });
   });
 })
 
