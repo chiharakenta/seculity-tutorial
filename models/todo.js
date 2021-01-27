@@ -2,7 +2,16 @@
 module.exports = (sequelize, DataTypes) => {
   const todo = sequelize.define('todo', {
     content: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'Todoの内容を入力してください'
+        },
+        len: {
+          args: [0, 100],
+          msg: '100文字以内で入力してください'
+        }
+      }
     },
     category_id: DataTypes.INTEGER
   }, {

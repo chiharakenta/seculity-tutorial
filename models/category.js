@@ -7,7 +7,10 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           msg: 'カテゴリー名を記入してください'
         },
-        max: 10
+        len: {
+          args: [0, 20],
+          msg: '20文字以下で入力してください'
+        }
       }
     }
   }, {

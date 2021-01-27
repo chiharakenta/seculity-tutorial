@@ -3,63 +3,60 @@ const router = express.Router();
 const db = require('../models/index');
 
 // カテゴリー一覧
-router.get('/', function(req, res) {
+router.get('/', async function(req, res) {
   const options = {
     include: [{
       model: db.todo
     }]
   };
-  db.category.findAll(options).then(function(results) {
-    res.render('categories/index.ejs', { categories: results, errors: false });
-  });
+  const categories = await db.category.findAll(options);
+  res.render('categories/index.ejs', { categories: categories, errors: false });
 });
 
-router.get('/new', function(req, res) {
-  res.render('categories/new.ejs', { errors: false });
-});
-
-router.post('/', function(req, res) {
+router.post('/', async function(req, res) {
   const params = {
     name: req.body.categoryName
   };
-  db.category.create(params)
-    .then(function(results) {
-      res.redirect('/categories');
-    })
-    .catch(function(errors) {
-      res.render('categories/new.ejs', { errors: errors.errors });
-    });
+  try {
+    await db.category.create(params);
+    res.redirect('/categories');
+  } catch(e) {
+    const categories = await db.category.findAll();
+    res.render('categories/index.ejs', { categories: categories, errors: e.errors });
+  }
 });
 
-router.get('/:id/edit', function(req, res) {
-  db.category.findByPk(req.params.id).then(function(results) {
-    res.render('categories/edit.ejs', { category: results });
-  });
+router.get('/:id/edit', async function(req, res) {
+  const category = await db.category.findByPk(req.params.id);
+  res.render('categories/edit.ejs', { category: category, errors: false });
 });
 
-router.put('/:id', function(req, res) {
+router.put('/:id', async function(req, res) {
   const params = {
     name: req.body.categoryName
   };
-  const filter = {
+  const options = {
     where: {
       id: req.params.id
     }
   }
-  db.category.update(params, filter).then(function(results) {
-    res.redirect('/categories')
-  });
+  try {
+    await db.category.update(params, options);
+    res.redirect('/categories');
+  } catch(e) {
+    const category = await db.category.findByPk(req.params.id);
+    res.render('categories/edit', { category: category, errors: e.errors });
+  }
 })
 
-router.delete('/:id', function(req, res) {
-  const filter = {
+router.delete('/:id', async function(req, res) {
+  const options = {
     where: {
       id: req.params.id
     }
   };
-  db.category.destroy(filter).then(function(results) {
-    res.redirect('/categories');
-  });
+  await db.category.destroy(options);
+  res.redirect('/categories');
 });
 
 module.exports = router;

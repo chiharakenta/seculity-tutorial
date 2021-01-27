@@ -1,9 +1,12 @@
 <%- include('../partials/header') %>
+<%- include('../partials/error') %>
     <h1>カテゴリー管理</h1>
-    <a href="/categories/new">
-        <button>カテゴリーを作成する</button>
-    </a>
-    <a href="/todos">タスク一覧に戻る</a>
+    <h2>カテゴリー作成</h1>
+    <form action="/categories" method="post">
+        <input type="text" name="categoryName">
+        <input type="submit" value="作成">
+    </form>
+    <h2>カテゴリー一覧</h2>
     <ul>
         <% categories.map((category) => { %>
         <li><%= category.id %> <%= category.name %></li>

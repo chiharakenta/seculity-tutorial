@@ -1,0 +1,9 @@
+<% if (errors) { %>
+    <div class="error-window">
+        <ul>
+            <% errors.map(function(error) { %>
+                <li><%= error.message %></li>
+            <% }) %>
+        </ul>
+    </div>
+<% } %>
