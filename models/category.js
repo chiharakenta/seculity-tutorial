@@ -19,5 +19,10 @@ module.exports = (sequelize, DataTypes) => {
   category.associate = function(models) {
     category.hasMany(models.todo);
   };
+
+  category.prototype.getIdAndContent = function () {
+    return `${this.id}. ${this.name}`;
+  }
+  
   return category;
 };

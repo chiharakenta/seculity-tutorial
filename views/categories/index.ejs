@@ -9,7 +9,7 @@
     <h2>カテゴリー一覧</h2>
     <ul>
         <% categories.map((category) => { %>
-        <li><%= category.id %> <%= category.name %></li>
+        <li><%= category.getIdAndContent() %></li>
         <a href="/categories/<%= category.id %>/edit">編集</a>
         <form action="/categories/<%= category.id %>" method="post">
             <input type="hidden" name="_method" value="delete">
